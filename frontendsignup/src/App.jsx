@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
 
+//creating a class based component
 class App extends Component {
     constructor(){
         super()
+        // state will hold all of the fields on the signup form 
         this.state = {
             fullName:'',
             username:'',
@@ -19,6 +21,9 @@ class App extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    //"setState" is a react function that changes the value of "state". 
+    //so if a user inputs their info this event listener will change the original state to what they inputed 
+    //(look below at "render()" and notice the onChange event handler)
     changeFullName(event){
         this.setState({
             fullName:event.target.value
@@ -44,6 +49,7 @@ class App extends Component {
         //so it doesn't refresh the whole page after user signs up
         event.preventDefault()
 
+        //once the user clicks "submit", the "onSubmit handler" will be triggered and will collect all of the values and save it in "registered"
         const registered = {
             fullName: this.state.fullName,
             username: this.state.username,
@@ -51,14 +57,14 @@ class App extends Component {
             password: this.state.password
         }
 
-        //now send it to the backend using axios and the backend will send it to mongodb
+        //now from the frontend, send it to the backend using axios and the backend will send it to mongodb
         axios.post('http://localhost:4000/app/signup', registered)
             .then(res => console.log(res.data))
 
         // if there is a home page in the application we would apply
         // window.location = '/home'
         // but there isn't so instead  
-        
+        // we reset our "state" to what it originally was like this:     
         this.setState({
             fullName:'',
             username:'',

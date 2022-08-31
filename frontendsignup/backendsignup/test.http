@@ -1,3 +1,7 @@
+//mimics the frontend of the application so we can check our backend
+//the frontend collects the data that the user entered and sends the post request to the server 
+
+
 POST http://localhost:4000/app/signup
 Content-Type: application/json
 
